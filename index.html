@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Víctor Henríquez | Full Stack Web Developer & AI Consultant</title>
+    <meta name="description" content="Especializado en desarrollo web, WordPress e Inteligencia Artificial.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- STYLES -->
+    <style>
+        :root {
+            --bg-main: #050505;
+            --accent: #39ff14;
+            --text-main: #FFFFFF;
+            --text-secondary: #9ca3af;
+            --surface-1: #0a0a0a;
+            --surface-2: #1a1a1a;
+            --surface-3: #222222;
+            --glow: rgba(57, 255, 20, 0.3);
+            --glow-strong: rgba(57, 255, 20, 0.5);
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+            font-size: 16px;
+        }
+
+        .btn i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover i {
+            transform: translateX(4px);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--bg-main);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .btn-primary:hover {
+            background-color: #32e612;
+            box-shadow: 0 0 30px var(--glow-strong);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--surface-3);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background-color: rgba(57, 255, 20, 0.05);
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .glass-card {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            transition: var(--transition);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(57, 255, 20, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 24px 0;
+        }
+
+        header.scrolled {
+            padding: 16px 0;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -1px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            border: 1px solid var(--accent);
+            color: var(--accent) !important;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        .nav-cta:hover {
+            background: rgba(57, 255, 20, 0.1);
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;
+            color: var(--text-main);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+            border-radius: 30px;
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 5vw, 64px);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item h3 {
+            font-size: 32px;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .stat-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background: var(--accent);
+            filter: blur(100px);
+            opacity: 0.2;
+            border-radius: 50%;
+            z-index: 1;
+            animation: pulse-glow 4s ease-in-out infinite alternate;
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 1/1;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--surface-2);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 16px;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .about-closing {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-style: italic;
+            color: var(--accent) !important;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-card {
+            padding: 32px;
+        }
+
+        .skill-icon {
+            font-size: 32px;
+            color: var(--accent);
+            margin-bottom: 24px;
+            background: rgba(57, 255, 20, 0.1);
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            border: 1px solid rgba(57, 255, 20, 0.2);
+        }
+
+        .skill-card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skill-list li {
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-list li::before {
+            content: '•';
+            color: var(--accent);
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(57, 255, 20, 0.05);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .project-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--surface-2);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-category {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .project-title {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .tech-badge {
+            font-size: 12px;
+            padding: 4px 12px;
+            background: var(--surface-2);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .testim-card {
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .quote-icon {
+            font-size: 24px;
+            color: var(--accent);
+            opacity: 0.5;
+            margin-bottom: 24px;
+        }
+
+        .testim-text {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+            flex-grow: 1;
+            font-style: italic;
+        }
+
+        .testim-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--surface-2);
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--accent);
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .process-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 32px;
+            padding: 32px;
+            position: relative;
+        }
+
+        .process-number {
+            font-family: var(--font-heading);
+            font-size: 48px;
+            font-weight: 700;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+            line-height: 1;
+            min-width: 70px;
+            transition: var(--transition);
+        }
+
+        .process-step:hover .process-number {
+            -webkit-text-stroke: 1px var(--accent);
+            color: rgba(57, 255, 20, 0.1);
+        }
+
+        .process-content {
+            flex-grow: 1;
+        }
+
+        .process-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .process-header i {
+            font-size: 24px;
+            color: var(--accent);
+        }
+
+        .process-content h3 {
+            font-size: 24px;
+        }
+
+        .process-content p {
+            color: var(--text-secondary);
+        }
+
+        .brands {
+            padding: 60px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--surface-1);
+        }
+
+        .brands-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        .brand-item {
+            text-align: center;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .brand-item:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .brand-item h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #fff;
+            font-family: var(--font-heading);
+        }
+
+        .brand-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .cta-section {
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            background: var(--accent);
+            filter: blur(150px);
+            opacity: 0.15;
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-pre {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(40px, 5vw, 56px);
+            margin-bottom: 24px;
+        }
+
+        .cta-content p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .cta-info {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .cta-info span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-info i {
+            color: var(--accent);
+        }
+
+        footer {
+            background-color: #000;
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .footer-col p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            max-width: 300px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 4px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--bg-main);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--glow);
+        }
+
+        .footer-bottom {
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(57, 255, 20, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(57, 255, 20, 0);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                transform: scale(1);
+                opacity: 0.15;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0.25;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid {
+                gap: 40px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image {
+                margin: 0 auto;
+                max-width: 350px;
+            }
+
+            .hero p {
+                margin: 0 auto 40px;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-ctas {
+                justify-content: center;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(5, 5, 5, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                border-left: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-stats {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            .process-step {
+                gap: 20px;
+                padding: 24px;
+                flex-direction: column;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Víctor<span>.</span></a>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-links" id="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#sobre-mi">Sobre Mí</a>
+                <a href="#habilidades">Habilidades</a>
+                <a href="#portafolio">Portafolio</a>
+                <a href="#contacto" class="nav-cta">Contactar <i class="fas fa-arrow-right"></i></a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="inicio" class="hero section">
+            <div class="container hero-grid">
+                <div class="hero-content fade-in">
+                    <div class="hero-badge">
+                        <span class="dot"></span> Disponible para proyectos
+                    </div>
+                    <h1>Hola, Soy Víctor.<br><span class="text-accent">Desarrollador Web</span></h1>
+                    <p>Creo experiencias digitales que convierten visitantes en clientes. Especializado en desarrollo
+                        web, WordPress, e Inteligencia Artificial.</p>
+
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3>5+</h3>
+                            <p>Años Experiencia</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>100+</h3>
+                            <p>Proyectos Completados</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>2</h3>
+                            <p>Empresas Fundadas</p>
+                        </div>
+                    </div>
+
+                    <div class="hero-ctas">
+                        <a href="#contacto" class="btn btn-primary">CONTÁCTAME POR WHATSAPP <i
+                                class="fab fa-whatsapp"></i></a>
+                        <a href="#portafolio" class="btn btn-outline">Ver Proyectos <i
+                                class="fas fa-arrow-down"></i></a>
+                    </div>
+                </div>
+
+                <div class="hero-image-container fade-in delay-2">
+                    <div class="hero-glow"></div>
+                    <div class="hero-image">
+                        <!-- EDITABLE: Foto principal - Hero section -->
+                        <img src="imagenes/Victor Henriquez.png" alt="Víctor Henríquez">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="sobre-mi" class="section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">Sobre Mí</h2>
+                    <p class="text-secondary">Desarrollador, Fundador y Educador</p>
+                </div>
+
+                <div class="about-content fade-in delay-1">
+                    <p>Soy Desarrollador Web Full Stack con más de 5 años de experiencia creando soluciones digitales
+                        que generan resultados reales. He trabajado con clientes en Latinoamérica y Estados Unidos,
+                        desde pequeños negocios hasta empresas consolidadas.</p>
+
+                    <p>Fundé RadarCrew, una agencia digital especializada en desarrollo web, y co-fundé Agent BI, un
+                        producto de inteligencia artificial para empresas. También enseño desarrollo web e IA a más de
+                        40 estudiantes, varios de los cuales ya tienen sus propios clientes.</p>
+
+                    <p>Mi enfoque combina desarrollo técnico sólido con estrategia de negocio. No solo creo sitios web
+                        bonitos, creo herramientas que ayudan a mis clientes a crecer.</p>
+
+                    <div class="about-closing">
+                        Actualmente cursando Applied Technology en BYU-Idaho.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="habilidades" class="section" style="background: var(--surface-1);">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">Habilidades & Expertise</h2>
+                    <p class="text-secondary">Mi arsenal técnico y estratégico</p>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- Card 1 -->
+                    <div class="glass-card skill-card fade-in">
+                        <div class="skill-icon"><i class="fas fa-code"></i></div>
+                        <h3>Frontend Development</h3>
+                        <ul class="skill-list">
+                            <li>HTML5 / CSS3</li>
+                            <li>JavaScript (ES6+)</li>
+                            <li>React (Básico)</li>
+                            <li>WordPress / Elementor</li>
+                            <li>Diseño Responsive</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="glass-card skill-card fade-in delay-1">
+                        <div class="skill-icon"><i class="fas fa-server"></i></div>
+                        <h3>Backend Development</h3>
+                        <ul class="skill-list">
+                            <li>Python (Intermedio)</li>
+                            <li>PHP</li>
+                            <li>MySQL / Bases de datos</li>
+                            <li>APIs & Integraciones</li>
+                            <li>Git & GitHub</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="glass-card skill-card fade-in delay-2">
+                        <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                        <h3>Inteligencia Artificial</h3>
+                        <ul class="skill-list">
+                            <li>ChatGPT / Claude / Gemini</li>
+                            <li>Aura Built / V0 / Stitch</li>
+                            <li>Automatizaciones con IA</li>
+                            <li>Prompting avanzado</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="glass-card skill-card fade-in">
+                        <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
+                        <h3>Diseño & UX</h3>
+                        <ul class="skill-list">
+                            <li>Figma / Canva</li>
+                            <li>UI/UX Design</li>
+                            <li>Prototyping</li>
+                            <li>Branding</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="glass-card skill-card fade-in delay-1">
+                        <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Marketing Digital</h3>
+                        <ul class="skill-list">
+                            <li>SEO (Certificado LinkedIn)</li>
+                            <li>Google Analytics</li>
+                            <li>Email Marketing</li>
+                            <li>Funnels de conversión</li>
+                            <li>Estrategia de contenido</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="glass-card skill-card fade-in delay-2">
+                        <div class="skill-icon"><i class="fas fa-briefcase"></i></div>
+                        <h3>Gestión de Proyectos</h3>
+                        <ul class="skill-list">
+                            <li>Comunicación cliente</li>
+                            <li>Gestión de expectativas</li>
+                            <li>Entrega a tiempo</li>
+                            <li>Soporte post-lanzamiento</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portafolio" class="section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">Proyectos Destacados</h2>
+                    <p class="text-secondary">Una selección de mi mejor trabajo</p>
+                </div>
+
+                <div class="portfolio-filters fade-in delay-1">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="wordpress">WordPress</button>
+                    <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+                    <button class="filter-btn" data-filter="landing">Landing Pages</button>
+                    <button class="filter-btn" data-filter="custom">Custom Dev</button>
+                </div>
+
+                <div class="portfolio-grid">
+                    <!-- Project 1 -->
+                    <div class="glass-card project-card fade-in" data-category="wordpress custom">
+                        <div class="project-image">
+                            <!-- EDITABLE: Imagen del proyecto 1 -->
+                            <img src="https://via.placeholder.com/600x400/1a1a1a/39ff14?text=Corporate+Website"
+                                alt="Proyecto 1">
+                        </div>
+                        <div class="project-content">
+                            <!-- EDITABLE: Texto del proyecto 1 -->
+                            <div class="project-category">Corporate Website</div>
+                            <h3 class="project-title">[Nombre Cliente 1]</h3>
+                            <p class="project-desc">Sitio web corporativo para empresa de transporte. Diseño moderno,
+                                optimizado SEO, integración con sistema de reservas.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">WordPress</span>
+                                <span class="tech-badge">Elementor</span>
+                                <span class="tech-badge">PHP</span>
+                                <span class="tech-badge">Google Maps API</span>
+                            </div>
+                            <a href="#" class="btn btn-outline btn-small" style="width: fit-content;">Ver Proyecto <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="glass-card project-card fade-in delay-1" data-category="wordpress ecommerce">
+                        <div class="project-image">
+                            <!-- EDITABLE: Imagen del proyecto 2 -->
+                            <img src="https://via.placeholder.com/600x400/1a1a1a/39ff14?text=E-commerce"
+                                alt="Proyecto 2">
+                        </div>
+                        <div class="project-content">
+                            <!-- EDITABLE: Texto del proyecto 2 -->
+                            <div class="project-category">E-commerce</div>
+                            <h3 class="project-title">[Nombre Cliente 2]</h3>
+                            <p class="project-desc">Tienda online de moda. Catálogo digital completo con WooCommerce,
+                                pasarela de pagos, gestión de inventario.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">WordPress</span>
+                                <span class="tech-badge">WooCommerce</span>
+                                <span class="tech-badge">Stripe</span>
+                            </div>
+                            <a href="#" class="btn btn-outline btn-small" style="width: fit-content;">Ver Proyecto <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="glass-card project-card fade-in" data-category="landing">
+                        <div class="project-image">
+                            <!-- EDITABLE: Imagen del proyecto 3 -->
+                            <img src="https://via.placeholder.com/600x400/1a1a1a/39ff14?text=Landing+Page"
+                                alt="Proyecto 3">
+                        </div>
+                        <div class="project-content">
+                            <!-- EDITABLE: Texto del proyecto 3 -->
+                            <div class="project-category">Landing Page</div>
+                            <h3 class="project-title">[Nombre Cliente 3]</h3>
+                            <p class="project-desc">Landing page de conversión para curso online. Funnel completo con
+                                integración de email marketing y pagos.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML/CSS</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Mailchimp</span>
+                            </div>
+                            <a href="#" class="btn btn-outline btn-small" style="width: fit-content;">Ver Proyecto <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="glass-card project-card fade-in delay-1" data-category="wordpress custom">
+                        <div class="project-image">
+                            <!-- EDITABLE: Imagen del proyecto 4 -->
+                            <img src="https://via.placeholder.com/600x400/1a1a1a/39ff14?text=Real+Estate"
+                                alt="Proyecto 4">
+                        </div>
+                        <div class="project-content">
+                            <!-- EDITABLE: Texto del proyecto 4 -->
+                            <div class="project-category">Real Estate</div>
+                            <h3 class="project-title">[Nombre Cliente 4]</h3>
+                            <p class="project-desc">Plataforma para inmobiliaria con listado de propiedades, filtros
+                                avanzados, formularios de contacto.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">WordPress</span>
+                                <span class="tech-badge">Custom Fields</span>
+                                <span class="tech-badge">Google Maps</span>
+                            </div>
+                            <a href="#" class="btn btn-outline btn-small" style="width: fit-content;">Ver Proyecto <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="glass-card project-card fade-in" data-category="custom">
+                        <div class="project-image">
+                            <!-- EDITABLE: Imagen del proyecto 5 -->
+                            <img src="https://via.placeholder.com/600x400/1a1a1a/39ff14?text=SaaS+Product"
+                                alt="Proyecto 5">
+                        </div>
+                        <div class="project-content">
+                            <!-- EDITABLE: Texto del proyecto 5 -->
+                            <div class="project-category">SaaS Product</div>
+                            <h3 class="project-title">[Nombre Cliente 5]</h3>
+                            <p class="project-desc">Producto de inteligencia artificial para análisis de datos
+                                empresariales. Co-fundador y desarrollador principal.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">AI/ML</span>
+                                <span class="tech-badge">APIs</span>
+                            </div>
+                            <a href="#" class="btn btn-outline btn-small" style="width: fit-content;">Ver Proyecto <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="glass-card project-card fade-in delay-1" data-category="wordpress custom">
+                        <div class="project-image">
+                            <!-- EDITABLE: Imagen del proyecto 6 -->
+                            <img src="https://via.placeholder.com/600x400/1a1a1a/39ff14?text=Portfolio"
+                                alt="Proyecto 6">
+                        </div>
+                        <div class="project-content">
+                            <!-- EDITABLE: Texto del proyecto 6 -->
+                            <div class="project-category">Portfolio / Personal</div>
+                            <h3 class="project-title">[Nombre Cliente 6]</h3>
+                            <p class="project-desc">Portafolio profesional para fotógrafo. Galería optimizada, carga
+                                rápida de imágenes, diseño minimalista.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">WordPress</span>
+                                <span class="tech-badge">Custom Theme</span>
+                                <span class="tech-badge">Lightbox</span>
+                            </div>
+                            <a href="#" class="btn btn-outline btn-small" style="width: fit-content;">Ver Proyecto <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section" style="background: var(--surface-1);">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">Client Feedback</h2>
+                    <p class="text-secondary">Lo que dicen las personas con las que he trabajado</p>
+                </div>
+
+                <div class="testimonials-grid">
+                    <!-- Testimonial 1 -->
+                    <div class="glass-card testim-card fade-in">
+                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <!-- EDITABLE: Texto del Testimonio 1 -->
+                        <p class="testim-text">"Víctor entregó exactamente lo que necesitábamos y en el tiempo
+                            prometido. Su conocimiento técnico y atención al detalle hicieron la diferencia. Altamente
+                            recomendado."</p>
+                        <div class="testim-author">
+                            <!-- EDITABLE: Foto e info del cliente 1 -->
+                            <div class="author-avatar">VS</div>
+                            <div class="author-info">
+                                <h4>Cliente Satisfecho</h4>
+                                <p>Dueño, Empresa Local</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="glass-card testim-card fade-in delay-1">
+                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <!-- EDITABLE: Texto del Testimonio 2 -->
+                        <p class="testim-text">"Trabajar con Víctor fue increíble. No solo creó una web hermosa, sino
+                            que nos enseñó a gestionarla. Nuestras ventas online aumentaron 40% en el primer mes."</p>
+                        <div class="testim-author">
+                            <!-- EDITABLE: Foto e info del cliente 2 -->
+                            <div class="author-avatar">AS</div>
+                            <div class="author-info">
+                                <h4>Alejandro S.</h4>
+                                <p>Emprendedor Digital</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="glass-card testim-card fade-in delay-2">
+                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <!-- EDITABLE: Texto del Testimonio 3 -->
+                        <p class="testim-text">"Profesional, rápido y con excelente comunicación. Víctor entendió
+                            nuestra visión desde el inicio y la ejecutó perfectamente. Sin duda volveremos a trabajar
+                            juntos."</p>
+                        <div class="testim-author">
+                            <!-- EDITABLE: Foto e info del cliente 3 -->
+                            <div class="author-avatar">DM</div>
+                            <div class="author-info">
+                                <h4>Daniel M.</h4>
+                                <p>Fundador, Startup Tech</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section id="proceso" class="section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">Cómo Trabajo Contigo</h2>
+                    <p class="text-secondary">Un proceso claro y transparente de principio a fin</p>
+                </div>
+
+                <div class="process-timeline">
+                    <!-- Step 1 -->
+                    <div class="glass-card process-step fade-in">
+                        <div class="process-number">01</div>
+                        <div class="process-content">
+                            <div class="process-header">
+                                <i class="fas fa-comments"></i>
+                                <h3>Descubrimiento</h3>
+                            </div>
+                            <p>Conversamos sobre tu proyecto, objetivos, y audiencia. Entiendo tu visión y defino
+                                alcance, timeline y presupuesto.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="glass-card process-step fade-in">
+                        <div class="process-number">02</div>
+                        <div class="process-content">
+                            <div class="process-header">
+                                <i class="fas fa-drafting-compass"></i>
+                                <h3>Diseño & Estrategia</h3>
+                            </div>
+                            <p>Creo wireframes y prototipos. Defino arquitectura de información, UX, y estrategia de
+                                contenido alineada a tus metas.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="glass-card process-step fade-in">
+                        <div class="process-number">03</div>
+                        <div class="process-content">
+                            <div class="process-header">
+                                <i class="fas fa-laptop-code"></i>
+                                <h3>Desarrollo</h3>
+                            </div>
+                            <p>Codifico y construyo tu sitio. Optimizo para velocidad, SEO, y conversión. Te mantengo
+                                informado con updates regulares.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="glass-card process-step fade-in">
+                        <div class="process-number">04</div>
+                        <div class="process-content">
+                            <div class="process-header">
+                                <i class="fas fa-rocket"></i>
+                                <h3>Lanzamiento & Soporte</h3>
+                            </div>
+                            <p>Pruebo todo exhaustivamente. Lanzo tu sitio y te capacito para gestionarlo. Ofrezco
+                                soporte post-lanzamiento.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brands Section -->
+        <section class="brands">
+            <div class="container brands-grid fade-in">
+                <div class="brand-item">
+                    <!-- EDITABLE: Logo/Nombre Empresa 1 -->
+                    <h3>RadarCrew</h3>
+                    <p>Agencia Digital - Fundador</p>
+                </div>
+                <div class="brand-item">
+                    <!-- EDITABLE: Logo/Nombre Empresa 2 -->
+                    <h3>Agent BI</h3>
+                    <p>Producto de IA - Co-fundador</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contacto" class="cta-section">
+            <div class="cta-glow"></div>
+            <div class="container">
+                <div class="cta-content fade-in">
+                    <span class="cta-pre">¿Listo para empezar?</span>
+                    <h2>Hablemos de Tu Proyecto</h2>
+                    <p>Cuéntame qué necesitas y te envío una propuesta personalizada en 24 horas.</p>
+                    <!-- EDITABLE: Número de WhatsApp -->
+                    <a href="https://wa.me/580000000000" class="btn btn-primary" target="_blank"
+                        rel="noopener noreferrer">CONTÁCTAME POR WHATSAPP <i class="fab fa-whatsapp"></i></a>
+
+                    <div class="cta-info fade-in delay-1">
+                        <!-- EDITABLE: Contact Info -->
+                        <span><i class="fas fa-envelope"></i> victor@radarcrew.com</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Venezuela</span>
+                        <span><i class="fas fa-clock"></i> Respuesta en < 24h</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid fade-in">
+                <div class="footer-col">
+                    <h3>Víctor Henríquez</h3>
+                    <p>Desarrollador Web Full Stack & Consultor IA.</p>
+                    <p>Creando experiencias digitales que posicionan marcas y generan resultados.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <div class="footer-links">
+                        <a href="#inicio">Inicio</a>
+                        <a href="#sobre-mi">Sobre Mí</a>
+                        <a href="#portafolio">Proyectos</a>
+                        <a href="#proceso">Proceso</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Conecta Conmigo</h3>
+                    <div class="social-links">
+                        <!-- EDITABLE: Redes Sociales -->
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom fade-in delay-1">
+                <p>&copy; 2026 Víctor Henríquez. Todos los derechos reservados.</p>
+                <p>Hecho en Venezuela.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const navLinks = document.getElementById('nav-links');
+            const navItems = navLinks.querySelectorAll('a');
+
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    const icon = mobileToggle.querySelector('i');
+                    if (navLinks.classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            }
+
+            // Close mobile menu when clicking a link
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    const icon = mobileToggle.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            // Header Scroll Effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Portfolio Filtering
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked
+                    btn.classList.add('active');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    projectCards.forEach(card => {
+                        const categories = card.getAttribute('data-category');
+
+                        if (filterValue === 'all' || categories.includes(filterValue)) {
+                            card.style.display = 'flex';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Intersection Observer for scroll animations (fade-in)
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const appearOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('appear');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            fadeElements.forEach(el => {
+                appearOnScroll.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>
