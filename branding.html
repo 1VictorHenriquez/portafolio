@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Marca | Víctor Henríquez</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --color-neon: #39ff14;
+            --color-neon-alt: #00ff88;
+            --color-dark: #050505;
+            --color-dark-soft: #0a0a0a;
+            --color-surface: #1a1a1a;
+            --color-white: #ffffff;
+            --color-gray: #9ca3af;
+            --color-gray-light: #e5e7eb;
+            --color-red: #ef4444;
+
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+
+            --radius-sm: 14px;
+            --radius-md: 24px;
+            --radius-lg: 28px;
+            --radius-full: 50px;
+
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 40px 80px -15px rgba(0, 0, 0, 0.7);
+            --shadow-glow: 0 0 25px rgba(57, 255, 20, 0.2);
+            --shadow-glow-md: 0 0 40px rgba(57, 255, 20, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-dark);
+            color: var(--color-gray-light);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-display);
+            color: var(--color-white);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            h4 {
+                font-size: 1.25rem;
+            }
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .text-neon {
+            color: var(--color-neon);
+        }
+
+        .text-white {
+            color: var(--color-white);
+        }
+
+        .text-gray {
+            color: var(--color-gray);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @media (max-width: 639px) {
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Background grid */
+        .bg-grid {
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* Header Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--color-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--color-neon);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-neon);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(57, 255, 20, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+            z-index: -1;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--color-neon), var(--color-neon-alt));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+            border-radius: var(--radius-full);
+            color: var(--color-neon);
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+        }
+
+        /* Sections General */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            margin-bottom: 1rem;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Glass Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(57, 255, 20, 0.3);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Color Palette */
+        .color-card {
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .color-swatch {
+            height: 150px;
+            width: 100%;
+        }
+
+        .color-info {
+            padding: 1.5rem;
+            background: var(--color-surface);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: none;
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+        }
+
+        .color-info code {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--color-gray);
+            margin-top: 0.5rem;
+        }
+
+        /* Typography Show */
+        .typo-showcase {
+            background: rgba(25, 25, 25, 0.5);
+            padding: 3rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .typo-specimen {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .typo-specimen:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* Buttons & Forms */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--color-neon);
+            color: #000000;
+            padding: 1.3rem 2rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow-md);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-neon);
+            border: 2px solid var(--color-neon);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-display);
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(57, 255, 20, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-white);
+            padding: 1.2rem;
+            border-radius: var(--radius-sm);
+            font-size: 1.05rem;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-neon);
+            box-shadow: 0 0 0 4px rgba(57, 255, 20, 0.05);
+        }
+
+        /* Do's and Don'ts */
+        .rule-card {
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            height: 100%;
+        }
+
+        .rule-do {
+            background: rgba(57, 255, 20, 0.05);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+        }
+
+        .rule-dont {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .rule-list {
+            margin-top: 1.5rem;
+            list-style: none;
+        }
+
+        .rule-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-dark);
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body class="bg-grid">
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i data-lucide="user" style="color: var(--color-neon);"></i>
+                    Víctor <span>Henríquez</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#intro">Introducción</a></li>
+                    <li><a href="#colors">Colores</a></li>
+                    <li><a href="#typography">Tipografía</a></li>
+                    <li><a href="#ui">Componentes UI</a></li>
+                    <li><a href="#rules">Reglas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="intro">
+        <div class="container">
+            <div class="badge">
+                <i data-lucide="book-open" size="16"></i> Manual de Identidad Visual
+            </div>
+            <h1>Víctor <span>Henríquez</span></h1>
+            <p style="font-size: 1.25rem; max-width: 800px; margin: 2rem auto; color: var(--color-gray);">
+                Definiendo los elementos visuales y de comunicación de mi marca personal. Moderna, tecnológica,
+                orientada a resultados e innovación mediante IA y automatización.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#colors" class="btn btn-primary">
+                    Explorar Manual <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+
+            <div style="margin-top: 4rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <div
+                    style="text-align: left; background: rgba(255,255,255,0.02); padding: 1rem 1.5rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.05);">
+                    <div
+                        style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-gray); letter-spacing: 1px;">
+                        Versión</div>
+                    <div style="font-weight: 600; color: var(--color-white);">1.0 (Abril 2026)</div>
+                </div>
+                <div
+                    style="text-align: left; background: rgba(255,255,255,0.02); padding: 1rem 1.5rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.05);">
+                    <div
+                        style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-gray); letter-spacing: 1px;">
+                        Status</div>
+                    <div
+                        style="font-weight: 600; color: var(--color-neon); display: flex; align-items: center; gap: 0.5rem;">
+                        <div
+                            style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-neon); box-shadow: 0 0 10px var(--color-neon);">
+                        </div> Activo
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Colors Section -->
+    <section id="colors" style="background: rgba(10,10,10,0.5);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Paleta de Colores</h2>
+                <p>Nuestros colores definen la estética tech y moderna, manteniendo alto contraste y legibilidad.</p>
+            </div>
+
+            <h3 style="margin-bottom: 2rem;">Colores Principales</h3>
+            <div class="grid-3 mb-4" style="margin-bottom: 4rem;">
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: var(--color-neon);"></div>
+                    <div class="color-info">
+                        <h4>Verde Neón (Acento)</h4>
+                        <code>HEX: #39ff14</code>
+                        <code>RGB: 57, 255, 20</code>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: var(--color-dark);"></div>
+                    <div class="color-info">
+                        <h4>Negro Principal</h4>
+                        <code>HEX: #050505</code>
+                        <code>RGB: 5, 5, 5</code>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch"
+                        style="background-color: var(--color-white); border: 1px solid rgba(255,255,255,0.1);"></div>
+                    <div class="color-info">
+                        <h4>Blanco</h4>
+                        <code>HEX: #FFFFFF</code>
+                        <code>RGB: 255, 255, 255</code>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 2rem;">Colores Secundarios</h3>
+            <div class="grid-4">
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: var(--color-gray);"></div>
+                    <div class="color-info">
+                        <h4>Gris Medio</h4>
+                        <code>HEX: #9ca3af</code>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: var(--color-gray-light);"></div>
+                    <div class="color-info">
+                        <h4>Gris Claro</h4>
+                        <code>HEX: #e5e7eb</code>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: var(--color-dark-soft);"></div>
+                    <div class="color-info">
+                        <h4>Negro Suave</h4>
+                        <code>HEX: #0a0a0a</code>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch"
+                        style="background-color: var(--color-surface); border: 1px solid rgba(255,255,255,0.05);"></div>
+                    <div class="color-info">
+                        <h4>Gris Oscuro</h4>
+                        <code>HEX: #1a1a1a</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top: 4rem;">
+                <div class="card">
+                    <h4 style="color: var(--color-neon); margin-bottom: 1rem;"><i data-lucide="check-circle" size="20"
+                            style="vertical-align: middle; margin-right: 0.5rem;"></i> Hacer</h4>
+                    <ul class="rule-list">
+                        <li><i data-lucide="arrow-right" size="16"></i> Usar Verde Neón como acento SIEMPRE.</li>
+                        <li><i data-lucide="arrow-right" size="16"></i> Mantener fondos negros en contexto digital.</li>
+                        <li><i data-lucide="arrow-right" size="16"></i> Respetar contraste accesible (mínimo 4.5:1).
+                        </li>
+                        <li><i data-lucide="arrow-right" size="16"></i> Aplicar glows sutiles en botones interactivos.
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--color-red); margin-bottom: 1rem;"><i data-lucide="x-circle" size="20"
+                            style="vertical-align: middle; margin-right: 0.5rem;"></i> No Hacer</h4>
+                    <ul class="rule-list">
+                        <li><i data-lucide="arrow-right" size="16"></i> NO usar fondos blancos (excepto impresos).</li>
+                        <li><i data-lucide="arrow-right" size="16"></i> NO excederse con el Verde Neón.</li>
+                        <li><i data-lucide="arrow-right" size="16"></i> NO introducir otros colores primarios.</li>
+                        <li><i data-lucide="arrow-right" size="16"></i> NO usar texto verde sobre fondos claros.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section id="typography">
+        <div class="container">
+            <div class="section-header">
+                <h2>Tipografía</h2>
+                <p>Nuestra sistema tipográfico provee jerarquía clara, estética racional e inmensa legibilidad en
+                    pantalla.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="typo-showcase">
+                    <h3 style="color: var(--color-neon); font-family: var(--font-display);">Space Grotesk</h3>
+                    <p class="text-gray" style="margin-bottom: 2rem;">Títulos, Subtítulos, Badges, CTAs.</p>
+
+                    <div style="font-family: 'Space Grotesk', sans-serif;">
+                        <h1 style="font-size: 3rem;">Heading 1</h1>
+                        <h2 style="font-size: 2.5rem;">Heading 2</h2>
+                        <h3 style="font-size: 2rem;">Heading 3</h3>
+                        <h4 style="font-size: 1.5rem;">Heading 4</h4>
+                    </div>
+                </div>
+
+                <div class="typo-showcase">
+                    <h3 style="color: var(--color-white); font-family: var(--font-body);">Inter</h3>
+                    <p class="text-gray" style="margin-bottom: 2rem;">Body text, párrafos largos, descripciones
+                        pequeñas.</p>
+
+                    <div style="font-family: 'Inter', sans-serif;">
+                        <p style="font-size: 1.25rem;"><strong>Large Body</strong>: El diseño no es solo cómo se ve,
+                            sino cómo funciona.</p>
+                        <p style="font-size: 1rem;"><strong>Regular Body</strong>: La automatización nos permite dedicar
+                            tiempo al trabajo que realmente importa, maximizando el potencial creativo.</p>
+                        <p style="font-size: 0.875rem; color: var(--color-gray);"><strong>Small Body</strong>: Textos
+                            suplementarios y menos cruciales se muestran así.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UI Components Section -->
+    <section id="ui" style="background: rgba(10,10,10,0.5);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Componentes UI</h2>
+                <p>Elementos reutilizables del sistema visual. Interfaces consistentes, interacciones predecibles.</p>
+            </div>
+
+            <!-- Cards Demo -->
+            <h3 style="margin-bottom: 2rem;">Cards & Superficies</h3>
+            <div class="grid-3" style="margin-bottom: 4rem;">
+                <div class="card"
+                    style="background: rgba(15, 15, 15, 0.65); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: var(--shadow-lg);">
+                    <i data-lucide="layers" size="32" style="color: var(--color-neon); margin-bottom: 1.5rem;"></i>
+                    <h4>Glassmorphism</h4>
+                    <p style="color: var(--color-gray); font-size: 0.9rem; margin-top: 1rem;">Fondo oscuro, desenfoque
+                        sutil y bordes delicados. Efecto muy moderno.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="cpu" size="32" style="color: var(--color-neon); margin-bottom: 1.5rem;"></i>
+                    <h4>Efectos Hover</h4>
+                    <p style="color: var(--color-gray); font-size: 0.9rem; margin-top: 1rem;">Animación de elevación
+                        fluida (-8px) y resplandor verde en los bordes.</p>
+                </div>
+                <div class="card" style="background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);">
+                    <i data-lucide="zap" size="32" style="color: var(--color-neon); margin-bottom: 1.5rem;"></i>
+                    <h4>Gradiente Sutil</h4>
+                    <p style="color: var(--color-gray); font-size: 0.9rem; margin-top: 1rem;">Texturas y degradados
+                        oscuros para dar profundidad sin saturar.</p>
+                </div>
+            </div>
+
+            <!-- Buttons Demo -->
+            <h3 style="margin-bottom: 2rem;">Botones & Controles</h3>
+            <div class="card" style="margin-bottom: 4rem;">
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: center;">
+                    <button class="btn btn-primary">Botón Principal</button>
+                    <button class="btn btn-secondary">Botón Secundario</button>
+                    <div class="badge">
+                        <i data-lucide="star" size="16"></i> Etiqueta
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms Demo -->
+            <h3 style="margin-bottom: 2rem;">Inputs & Formularios</h3>
+            <div class="card">
+                <div style="max-width: 500px;">
+                    <label
+                        style="display: block; margin-bottom: 0.5rem; font-family: var(--font-display); font-weight: 600;">Dirección
+                        de Email</label>
+                    <input type="email" class="form-control" placeholder="hola@victorhenriquez.com">
+
+                    <label
+                        style="display: block; margin-bottom: 0.5rem; margin-top: 1rem; font-family: var(--font-display); font-weight: 600;">Comentarios</label>
+                    <textarea class="form-control" rows="3" placeholder="Escribe tu mensaje..."></textarea>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Photography & Graphics Section -->
+    <section id="graphics">
+        <div class="container">
+            <div class="section-header">
+                <h2>Fotografía y Gráficos</h2>
+                <p>Estilo e inspiración para apoyar el contenido de marca.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="margin-bottom: 1.5rem;">Tratamiento</h3>
+                    <ul class="rule-list">
+                        <li><i data-lucide="camera" size="20" class="text-neon"></i> Fondos oscuros o neutros.</li>
+                        <li><i data-lucide="sun" size="20" class="text-neon"></i> Iluminación clara y composición
+                            minimalista.</li>
+                        <li><i data-lucide="code" size="20" class="text-neon"></i> Tech aesthetic: código o diseño de
+                            fondo.</li>
+                        <li><i data-lucide="activity" size="20" class="text-neon"></i> Contraste alto con tonos fríos.
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 style="margin-bottom: 1.5rem;">Iconografía</h3>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                        <div
+                            style="padding: 1rem; background: rgba(57,255,20,0.1); border-radius: var(--radius-sm); color: var(--color-neon);">
+                            <i data-lucide="terminal" size="32"></i></div>
+                        <div
+                            style="padding: 1rem; background: rgba(57,255,20,0.1); border-radius: var(--radius-sm); color: var(--color-neon);">
+                            <i data-lucide="robot" size="32"></i></div>
+                        <div
+                            style="padding: 1rem; background: rgba(57,255,20,0.1); border-radius: var(--radius-sm); color: var(--color-neon);">
+                            <i data-lucide="workflow" size="32"></i></div>
+                        <div
+                            style="padding: 1rem; background: rgba(57,255,20,0.1); border-radius: var(--radius-sm); color: var(--color-neon);">
+                            <i data-lucide="bar-chart-2" size="32"></i></div>
+                    </div>
+                    <p class="text-gray">Líneas de 2px, esquinas redondeadas. Principalmente Lucide Icons.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checklist / Rules Section -->
+    <section id="rules" style="background: rgba(10,10,10,0.5);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Checklist de Identidad</h2>
+                <p>Asegúrate de revisar esta lista antes de publicar material de marca.</p>
+            </div>
+
+            <div class="card" style="max-width: 800px; margin: 0 auto; background: var(--color-surface);">
+                <ul class="rule-list" style="margin-top: 0;">
+                    <li style="padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <i data-lucide="check-square" class="text-neon" size="24"></i>
+                        <div><strong>Paleta adecuada:</strong> ¿Usa colores negro, blanco y acentos en verde neón?</div>
+                    </li>
+                    <li style="padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <i data-lucide="check-square" class="text-neon" size="24"></i>
+                        <div><strong>Tipografía:</strong> ¿Usa Space Grotesk para títulos e Inter para textos largos?
+                        </div>
+                    </li>
+                    <li style="padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <i data-lucide="check-square" class="text-neon" size="24"></i>
+                        <div><strong>Legibilidad:</strong> ¿El contraste es accesible y los tamaños responsivos?</div>
+                    </li>
+                    <li style="padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <i data-lucide="check-square" class="text-neon" size="24"></i>
+                        <div><strong>Efectos Web:</strong> ¿Se incluyen los correspondientes 'glows' para 'hover states'
+                            y botones primarios?</div>
+                    </li>
+                    <li style="padding: 1rem 0;">
+                        <i data-lucide="check-square" class="text-neon" size="24"></i>
+                        <div><strong>Tono de Marca:</strong> ¿El copy suena profesional, directo, accesible y
+                            tecnológico?</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div
+                style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-white); margin-bottom: 1rem;">
+                <i data-lucide="user" style="color: var(--color-neon); vertical-align: middle;"></i> Víctor<span>
+                    Henríquez</span>
+            </div>
+            <p style="color: var(--color-gray); font-size: 0.9rem; max-width: 400px; margin: 0 auto 2rem auto;">
+                Manual de Identidad Visual v1.0<br>
+                Desarrollado para un impacto óptimo en la era de la información y la IA.
+            </p>
+            <div style="color: rgba(255,255,255,0.2); font-size: 0.8rem;">
+                &copy; <span id="year"></span> Víctor Henríquez. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para los Iconos y Utils -->
+    <script>
+        lucide.createIcons();
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

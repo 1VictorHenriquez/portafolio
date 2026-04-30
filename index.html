@@ -236,6 +236,38 @@
             width: 100%;
         }
 
+        .lang-switcher {
+            display: flex;
+            background: var(--surface-2);
+            border-radius: 20px;
+            padding: 4px;
+            margin-left: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            transition: var(--transition);
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: var(--bg-main);
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        .lang-btn:not(.active):hover {
+            color: var(--text-main);
+        }
+
         .nav-cta {
             border: 1px solid var(--accent);
             color: var(--accent) !important;
@@ -959,6 +991,11 @@
                 right: 0;
             }
 
+            .lang-switcher {
+                margin-left: 0;
+                margin-top: 24px;
+            }
+
             .mobile-toggle {
                 display: block;
             }
@@ -1013,11 +1050,17 @@
                 <i class="fas fa-bars"></i>
             </div>
             <nav class="nav-links" id="nav-links">
-                <a href="#inicio">Iniciosdz</a>
-                <a href="#sobre-mi">Sobre Mí</a>
-                <a href="#habilidades">Habilidades</a>
-                <a href="#portafolio">Portafolio</a>
-                <a href="#contacto" class="nav-cta">Contactar <i class="fas fa-arrow-right"></i></a>
+                <a href="#inicio" data-i18n="nav_inicio">Inicio</a>
+                <a href="#sobre-mi" data-i18n="nav_sobre">Sobre Mí</a>
+                <a href="#habilidades" data-i18n="nav_hab">Habilidades</a>
+                <a href="#portafolio" data-i18n="nav_port">Portafolio</a>
+                <a href="#contacto" class="nav-cta"><span data-i18n="nav_cont">Contactar</span> <i
+                        class="fas fa-arrow-right"></i></a>
+
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
             </nav>
         </div>
     </header>
@@ -1027,12 +1070,12 @@
         <section id="inicio" class="hero section">
             <div class="container hero-grid">
                 <div class="hero-content fade-in">
-                    <div class="hero-badge">
+                    <div class="hero-badge" data-i18n="hero_badge">
                         <span class="dot"></span> Disponible para proyectos
                     </div>
-                    <h1> Soy Víctor.<br><span class="text-accent">Desarrollador Web</span></h1>
-                    <p>Creo experiencias digitales que convierten visitantes en clientes. Especializado en desarrollo
-                        web, WordPress, e Inteligencia Artificial.</p>
+                    <h1 data-i18n="hero_title"> Soy Víctor.<br><span class="text-accent">Desarrollador Web</span></h1>
+                    <p data-i18n="hero_desc">Creo experiencias digitales que convierten visitantes en clientes.
+                        Especializado en desarrollo web, WordPress, e Inteligencia Artificial.</p>
 
                     <div class="hero-stats">
                         <div class="stat-item">
@@ -1044,8 +1087,8 @@
                             <p>Proyectos Completados</p>
                         </div>
                         <div class="stat-item">
-                            <h3>2</h3>
-                            <p>Empresas Fundadas</p>
+                            <h3>100%</h3>
+                            <p>Enfoque en Calidad y Entrega</p>
                         </div>
                     </div>
 
@@ -1061,7 +1104,7 @@
                     <div class="hero-glow"></div>
                     <div class="hero-image">
                         <!-- EDITABLE: Foto principal - Hero section -->
-                        <img src="imagenes/Victor Henriquez.png" alt="Víctor Henríquez">
+                        <img src="imagenes/VictorJose.png" alt="Víctor Henríquez">
                     </div>
                 </div>
             </div>
@@ -1072,20 +1115,15 @@
             <div class="container">
                 <div class="section-header fade-in">
                     <h2 class="section-title">Sobre Mí</h2>
-                    <p class="text-secondary">Desarrollador, Fundador y Educador</p>
+                    <p class="text-secondary">Desarrollador, Solucionador de Problemas y Mentor</p>
                 </div>
 
                 <div class="about-content fade-in delay-1">
-                    <p>Soy Desarrollador Web Full Stack con más de 5 años de experiencia creando soluciones digitales
-                        que generan resultados reales. He trabajado con clientes en Latinoamérica y Estados Unidos,
-                        desde pequeños negocios hasta empresas consolidadas.</p>
+                    <p>Soy un Desarrollador Web con más de 5 años de experiencia creando soluciones digitales orientadas a la conversión y el rendimiento. A lo largo de mi carrera, he colaborado con clientes en Latinoamérica y Estados Unidos, desde pequeños negocios hasta empresas consolidadas, liderando el desarrollo técnico en entornos de alto rendimiento.</p>
+                    
+                    <p>Tengo amplia experiencia arquitectando sitios web complejos, implementando sistemas automatizados y desarrollando productos impulsados por Inteligencia Artificial. Fuera de mis proyectos principales, comparto mi conocimiento a través de mi iniciativa personal de educación, donde he capacitado a más de 40 estudiantes en desarrollo web y buenas prácticas, lo que me permite mantener mis habilidades técnicas siempre afiladas y actualizadas.</p>
 
-                    <p>Fundé RadarCrew, una agencia digital especializada en desarrollo web, y co-fundé Agent BI, un
-                        producto de inteligencia artificial para empresas. También enseño desarrollo web e IA a más de
-                        40 estudiantes, varios de los cuales ya tienen sus propios clientes.</p>
-
-                    <p>Mi enfoque combina desarrollo técnico sólido con estrategia de negocio. No solo creo sitios web
-                        bonitos, creo herramientas que ayudan a mis clientes a crecer.</p>
+                    <p>Mi enfoque combina un sólido conocimiento técnico con una mentalidad sistémica: implemento rigurosos procesos de QA (aseguramiento de calidad) en cada fase para garantizar entregas impecables. No solo escribo código; diseño herramientas eficientes que ayudan a las empresas a escalar.</p>
 
                     <div class="about-closing">
                         Actualmente cursando Applied Technology en BYU-Idaho.
@@ -1106,11 +1144,11 @@
                     <!-- Card 1 -->
                     <div class="glass-card skill-card fade-in">
                         <div class="skill-icon"><i class="fas fa-code"></i></div>
-                        <h3>Frontend Development</h3>
+                        <h3>Frontend & CMS</h3>
                         <ul class="skill-list">
                             <li>HTML5 / CSS3</li>
                             <li>JavaScript (ES6+)</li>
-                            <li>React (Básico)</li>
+                            <li>Shopify / Wix</li>
                             <li>WordPress / Elementor</li>
                             <li>Diseño Responsive</li>
                         </ul>
@@ -1122,7 +1160,7 @@
                         <h3>Backend Development</h3>
                         <ul class="skill-list">
                             <li>Python (Intermedio)</li>
-                            <li>PHP</li>
+                            <li>PHP & WordPress Core</li>
                             <li>MySQL / Bases de datos</li>
                             <li>APIs & Integraciones</li>
                             <li>Git & GitHub</li>
@@ -1135,7 +1173,7 @@
                         <h3>Inteligencia Artificial</h3>
                         <ul class="skill-list">
                             <li>ChatGPT / Claude / Gemini</li>
-                            <li>Aura Built / V0 / Stitch</li>
+                            <li>Aura Built / Stitch</li>
                             <li>Automatizaciones con IA</li>
                             <li>Prompting avanzado</li>
                         </ul>
@@ -1159,7 +1197,7 @@
                         <h3>Marketing Digital</h3>
                         <ul class="skill-list">
                             <li>SEO (Certificado LinkedIn)</li>
-                            <li>Google Analytics</li>
+                            <li>SEMrush</li>
                             <li>Email Marketing</li>
                             <li>Funnels de conversión</li>
                             <li>Estrategia de contenido</li>
@@ -1640,6 +1678,231 @@
 
             fadeElements.forEach(el => {
                 appearOnScroll.observe(el);
+            });
+
+            // Language Switcher Logic
+            const translations = {
+                es: {
+                    // Nav
+                    nav_inicio: "Inicio",
+                    nav_sobre: "Sobre Mí",
+                    nav_hab: "Habilidades",
+                    nav_port: "Portafolio",
+                    nav_cont: "Contactar",
+                    // Hero
+                    hero_badge: "<span class=\"dot\"></span> Disponible para proyectos",
+                    hero_title: "Soy Víctor.<br><span class=\"text-accent\">Desarrollador Web</span>",
+                    hero_desc: "Creo experiencias digitales que convierten visitantes en clientes. Especializado en desarrollo web, WordPress, e Inteligencia Artificial.",
+                    hero_stat_1_tit: "Años Experiencia",
+                    hero_stat_2_tit: "Proyectos Completados",
+                    hero_stat_3_tit: "Empresas Fundadas",
+                    hero_btn_1: "CONTÁCTAME POR WHATSAPP <i class=\"fab fa-whatsapp\"></i>",
+                    hero_btn_2: "Ver Proyectos <i class=\"fas fa-arrow-down\"></i>",
+                    // About
+                    about_title: "Sobre Mí",
+                    about_subtitle: "Desarrollador, Fundador y Educador",
+                    about_p1: "Soy Desarrollador Web Full Stack con más de 5 años de experiencia creando soluciones digitales que generan resultados reales. He trabajado con clientes en Latinoamérica y Estados Unidos, desde pequeños negocios hasta empresas consolidadas.",
+                    about_p2: "Fundé RadarCrew, una agencia digital especializada en desarrollo web, y co-fundé Agent BI, un producto de inteligencia artificial para empresas. También enseño desarrollo web e IA a más de 40 estudiantes, varios de los cuales ya tienen sus propios clientes.",
+                    about_p3: "Mi enfoque combina desarrollo técnico sólido con estrategia de negocio. No solo creo sitios web bonitos, creo herramientas que ayudan a mis clientes a crecer.",
+                    about_closing: "Actualmente cursando Applied Technology en BYU-Idaho.",
+                    // Skills
+                    skills_title: "Habilidades & Expertise",
+                    skills_subtitle: "Mi arsenal técnico y estratégico",
+                    skills_front: "Frontend Development",
+                    skills_front_1: "React (Básico)",
+                    skills_front_2: "Diseño Responsive",
+                    skills_back: "Backend Development",
+                    skills_back_1: "Python (Intermedio)",
+                    skills_back_2: "MySQL / Bases de datos",
+                    skills_back_3: "APIs & Integraciones",
+                    skills_ai: "Inteligencia Artificial",
+                    skills_ai_1: "Automatizaciones con IA",
+                    skills_ai_2: "Prompting avanzado",
+                    skills_design: "Diseño & UX",
+                    skills_marketing: "Marketing Digital",
+                    skills_marketing_1: "SEO (Certificado LinkedIn)",
+                    skills_marketing_2: "Funnels de conversión",
+                    skills_marketing_3: "Estrategia de contenido",
+                    skills_pm: "Gestión de Proyectos",
+                    skills_pm_1: "Comunicación cliente",
+                    skills_pm_2: "Gestión de expectativas",
+                    skills_pm_3: "Entrega a tiempo",
+                    skills_pm_4: "Soporte post-lanzamiento",
+                    // Portfolio
+                    port_title: "Proyectos Destacados",
+                    port_subtitle: "Una selección de mi mejor trabajo",
+                    port_filter_all: "Todos",
+                    port_view_btn: "Ver Proyecto <i class=\"fas fa-arrow-right\"></i>",
+                    port_1_desc: "Sitio web corporativo para empresa de transporte. Diseño moderno, optimizado SEO, integración con sistema de reservas.",
+                    port_2_desc: "Tienda online de moda. Catálogo digital completo con WooCommerce, pasarela de pagos, gestión de inventario.",
+                    port_3_desc: "Landing page de conversión para curso online. Funnel completo con integración de email marketing y pagos.",
+                    port_4_desc: "Plataforma para inmobiliaria con listado de propiedades, filtros avanzados, formularios de contacto.",
+                    port_5_desc: "Producto de inteligencia artificial para análisis de datos empresariales. Co-fundador y desarrollador principal.",
+                    port_6_desc: "Portafolio profesional para fotógrafo. Galería optimizada, carga rápida de imágenes, diseño minimalista.",
+                    // Testimonials
+                    test_subtitle: "Lo que dicen las personas con las que he trabajado",
+                    test_1_quote: "\"Víctor entregó exactamente lo que necesitábamos y en el tiempo prometido. Su conocimiento técnico y atención al detalle hicieron la diferencia. Altamente recomendado.\"",
+                    test_1_role: "Dueño, Empresa Local",
+                    test_2_quote: "\"Trabajar con Víctor fue increíble. No solo creó una web hermosa, sino que nos enseñó a gestionarla. Nuestras ventas online aumentaron 40% en el primer mes.\"",
+                    test_2_role: "Emprendedor Digital",
+                    test_3_quote: "\"Profesional, rápido y con excelente comunicación. Víctor entendió nuestra visión desde el inicio y la ejecutó perfectamente. Sin duda volveremos a trabajar juntos.\"",
+                    test_3_role: "Fundador, Startup Tech",
+                    // Process
+                    proc_title: "Cómo Trabajo Contigo",
+                    proc_subtitle: "Un proceso claro y transparente de principio a fin",
+                    proc_1_title: "Descubrimiento",
+                    proc_1_desc: "Conversamos sobre tu proyecto, objetivos, y audiencia. Entiendo tu visión y defino alcance, timeline y presupuesto.",
+                    proc_2_title: "Diseño & Estrategia",
+                    proc_2_desc: "Creo wireframes y prototipos. Defino arquitectura de información, UX, y estrategia de contenido alineada a tus metas.",
+                    proc_3_title: "Desarrollo",
+                    proc_3_desc: "Codifico y construyo tu sitio. Optimizo para velocidad, SEO, y conversión. Te mantengo informado con updates regulares.",
+                    proc_4_title: "Lanzamiento & Soporte",
+                    proc_4_desc: "Pruebo todo exhaustivamente. Lanzo tu sitio y te capacito para gestionarlo. Ofrezco soporte post-lanzamiento.",
+                    // Brands
+                    brands_1_desc: "Agencia Digital - Fundador",
+                    brands_2_desc: "Producto de IA - Co-fundador",
+                    // CTA
+                    cta_pre: "¿Listo para empezar?",
+                    cta_title: "Hablemos de Tu Proyecto",
+                    cta_desc: "Cuéntame qué necesitas y te envío una propuesta personalizada en 24 horas.",
+                    cta_ans: "Respuesta en < 24h",
+                    // Footer
+                    footer_desc1: "Desarrollador Web Full Stack & Consultor IA.",
+                    footer_desc2: "Creando experiencias digitales que posicionan marcas y generan resultados.",
+                    footer_col2: "Enlaces Rápidos",
+                    footer_col3: "Conecta Conmigo",
+                    footer_link1: "Inicio",
+                    footer_link2: "Sobre Mí",
+                    footer_link3: "Proyectos",
+                    footer_link4: "Proceso",
+                    footer_copy: "&copy; 2026 Víctor Henríquez. Todos los derechos reservados.",
+                    footer_made: "Hecho en Venezuela."
+                },
+                en: {
+                    // Nav
+                    nav_inicio: "Home",
+                    nav_sobre: "About Me",
+                    nav_hab: "Skills",
+                    nav_port: "Portfolio",
+                    nav_cont: "Contact",
+                    // Hero
+                    hero_badge: "<span class=\"dot\"></span> Available for projects",
+                    hero_title: "I am Víctor.<br><span class=\"text-accent\">Web Developer</span>",
+                    hero_desc: "I create digital experiences that turn visitors into clients. Specialized in web development, WordPress, and Artificial Intelligence.",
+                    hero_stat_1_tit: "Years Experience",
+                    hero_stat_2_tit: "Completed Projects",
+                    hero_stat_3_tit: "Founded Companies",
+                    hero_btn_1: "CONTACT ME VIA WHATSAPP <i class=\"fab fa-whatsapp\"></i>",
+                    hero_btn_2: "View Projects <i class=\"fas fa-arrow-down\"></i>",
+                    // About
+                    about_title: "About Me",
+                    about_subtitle: "Developer, Founder & Educator",
+                    about_p1: "I'm a Full Stack Web Developer with over 5 years of experience creating digital solutions that generate real results. I've worked with clients across Latin America and the United States, from small local businesses to established enterprises.",
+                    about_p2: "I founded RadarCrew, a digital agency specializing in web development, and co-founded Agent BI, an AI product for businesses. I also teach web development and AI to over 40 students, many of whom already have their own clients.",
+                    about_p3: "My approach combines solid technical development with business strategy. I don't just build beautiful websites, I build tools that help my clients grow.",
+                    about_closing: "Currently studying Applied Technology at BYU-Idaho.",
+                    // Skills
+                    skills_title: "Skills & Expertise",
+                    skills_subtitle: "My technical and strategic arsenal",
+                    skills_front: "Frontend Development",
+                    skills_front_1: "React (Basic)",
+                    skills_front_2: "Responsive Design",
+                    skills_back: "Backend Development",
+                    skills_back_1: "Python (Intermediate)",
+                    skills_back_2: "MySQL / Databases",
+                    skills_back_3: "APIs & Integrations",
+                    skills_ai: "Artificial Intelligence",
+                    skills_ai_1: "AI Automations",
+                    skills_ai_2: "Advanced Prompting",
+                    skills_design: "Design & UX",
+                    skills_marketing: "Digital Marketing",
+                    skills_marketing_1: "SEO (LinkedIn Certified)",
+                    skills_marketing_2: "Conversion Funnels",
+                    skills_marketing_3: "Content Strategy",
+                    skills_pm: "Project Management",
+                    skills_pm_1: "Client Communication",
+                    skills_pm_2: "Expectation Management",
+                    skills_pm_3: "On-time Delivery",
+                    skills_pm_4: "Post-launch Support",
+                    // Portfolio
+                    port_title: "Featured Projects",
+                    port_subtitle: "A selection of my best work",
+                    port_filter_all: "All",
+                    port_view_btn: "View Project <i class=\"fas fa-arrow-right\"></i>",
+                    port_1_desc: "Corporate website for a transportation company. Modern design, SEO optimized, integrated with a booking system.",
+                    port_2_desc: "Online fashion store. Complete digital catalog with WooCommerce, payment gateway, inventory management.",
+                    port_3_desc: "Conversion landing page for an online course. Complete funnel with email marketing and payments integration.",
+                    port_4_desc: "Real estate platform with property listings, advanced filters, and contact forms.",
+                    port_5_desc: "Artificial intelligence product for enterprise data analysis. Co-founder and lead developer.",
+                    port_6_desc: "Professional portfolio for a photographer. Optimized gallery, fast image loading, minimalist design.",
+                    // Testimonials
+                    test_subtitle: "What people I've worked with have to say",
+                    test_1_quote: "\"Víctor delivered exactly what we needed and on time. His technical knowledge and attention to detail made the difference. Highly recommended.\"",
+                    test_1_role: "Owner, Local Business",
+                    test_2_quote: "\"Working with Víctor was incredible. He didn't just build a beautiful website, he taught us how to manage it. Our online sales increased by 40% in the first month.\"",
+                    test_2_role: "Digital Entrepreneur",
+                    test_3_quote: "\"Professional, fast, and excellent communication. Víctor understood our vision from the beginning and executed it perfectly. We will definitely work together again.\"",
+                    test_3_role: "Founder, Tech Startup",
+                    // Process
+                    proc_title: "How I Work With You",
+                    proc_subtitle: "A clear and transparent process from start to finish",
+                    proc_1_title: "Discovery",
+                    proc_1_desc: "We discuss your project, goals, and audience. I understand your vision and define scope, timeline, and budget.",
+                    proc_2_title: "Design & Strategy",
+                    proc_2_desc: "I create wireframes and prototypes. I define information architecture, UX, and content strategy aligned to your goals.",
+                    proc_3_title: "Development",
+                    proc_3_desc: "I code and build your site. Optimize for speed, SEO, and conversion. Keep you informed with regular updates.",
+                    proc_4_title: "Launch & Support",
+                    proc_4_desc: "I test everything thoroughly. Launch your site and train you to manage it. Offer post-launch support.",
+                    // Brands
+                    brands_1_desc: "Digital Agency - Founder",
+                    brands_2_desc: "AI Product - Co-founder",
+                    // CTA
+                    cta_pre: "Ready to start?",
+                    cta_title: "Let's Talk About Your Project",
+                    cta_desc: "Tell me what you need and I'll send you a custom proposal in 24 hours.",
+                    cta_ans: "Response in < 24h",
+                    // Footer
+                    footer_desc1: "Full Stack Web Developer & AI Consultant.",
+                    footer_desc2: "Creating digital experiences that position brands and generate results.",
+                    footer_col2: "Quick Links",
+                    footer_col3: "Connect With Me",
+                    footer_link1: "Home",
+                    footer_link2: "About Me",
+                    footer_link3: "Projects",
+                    footer_link4: "Process",
+                    footer_copy: "&copy; 2026 Víctor Henríquez. All rights reserved.",
+                    footer_made: "Made in Venezuela."
+                }
+            };
+
+            const langBtns = document.querySelectorAll('.lang-btn');
+            const elementsToTranslate = document.querySelectorAll('[data-i18n]');
+
+            let currentLang = localStorage.getItem('site_lang') || 'es';
+
+            function setLanguage(lang) {
+                langBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+                });
+
+                elementsToTranslate.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
+
+                localStorage.setItem('site_lang', lang);
+                document.documentElement.lang = lang;
+            }
+
+            setLanguage(currentLang);
+
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setLanguage(btn.getAttribute('data-lang'));
+                });
             });
         });
     </script>

@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domina WordPress + Elementor | Víctor Henríquez</title>
+    <meta name="description"
+        content="El paso a paso para construir sitios web profesionales con WordPress y Elementor. Pasa de cero a experto.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet">
+
+    <style>
+        /* ─── BRAND TOKENS ─────────────────────────────────────── */
+        :root {
+            --neon: #39ff14;
+            --neon-alt: #00ff88;
+            --dark: #050505;
+            --dark-soft: #0a0a0a;
+            --surface: #1a1a1a;
+            --surface-2: #111318;
+            --card: #1c1f27;
+            --white: #ffffff;
+            --gray: #9ca3af;
+            --gray-light: #e5e7eb;
+            --red: #ef4444;
+            --gold: #ffd700;
+
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+
+            --radius-sm: 14px;
+            --radius-md: 24px;
+            --radius-full: 50px;
+
+            --shadow-glow: 0 0 25px rgba(57, 255, 20, 0.25);
+            --shadow-glow-md: 0 0 45px rgba(57, 255, 20, 0.45);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+            --transition: all 0.3s ease;
+        }
+
+        /* ─── RESET & BASE ──────────────────────────────────────── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--gray-light);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Subtle grid texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-heading);
+            color: var(--white);
+            line-height: 1.15;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @media (max-width: 639px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+        }
+
+        /* ─── ANIMATIONS ────────────────────────────────────────── */
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                box-shadow: 0 0 6px var(--neon);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.3);
+                box-shadow: 0 0 14px var(--neon);
+            }
+        }
+
+        @keyframes glow-pulse {
+
+            0%,
+            100% {
+                opacity: 0.12;
+            }
+
+            50% {
+                opacity: 0.22;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ─── HEADER ─────────────────────────────────────────────── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.25rem 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(5, 5, 5, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.875rem 0;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--neon);
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.6rem 1.4rem;
+            background: transparent;
+            border: 1.5px solid rgba(57, 255, 20, 0.5);
+            border-radius: var(--radius-sm);
+            color: var(--neon);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: rgba(57, 255, 20, 0.08);
+            border-color: var(--neon);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        /* ─── HERO ───────────────────────────────────────────────── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            padding-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-radial {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(57, 255, 20, 0.14) 0%, transparent 68%);
+            pointer-events: none;
+            animation: glow-pulse 5s ease-in-out infinite;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 1rem;
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid rgba(57, 255, 20, 0.25);
+            border-radius: var(--radius-full);
+            color: var(--neon);
+            font-family: var(--font-heading);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge .dot {
+            width: 7px;
+            height: 7px;
+            background: var(--neon);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 .grad {
+            background: linear-gradient(135deg, var(--neon), var(--neon-alt));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--gray);
+            line-height: 1.75;
+            margin-bottom: 2.25rem;
+            max-width: 520px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.1rem 2.2rem;
+            background: var(--neon);
+            color: #000;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-glow);
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow-md);
+            background: #42ff1e;
+        }
+
+        .guarantee-note {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .guarantee-note .material-symbols-outlined {
+            font-size: 1.1rem;
+            color: var(--neon);
+        }
+
+        /* Hero image side */
+        .hero-image-wrap {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image-glow {
+            position: absolute;
+            inset: -15%;
+            background: radial-gradient(circle, rgba(57, 255, 20, 0.18) 0%, transparent 65%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-image-card {
+            position: relative;
+            z-index: 1;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1.5px solid rgba(57, 255, 20, 0.2);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.7), var(--shadow-glow);
+            transition: var(--transition);
+        }
+
+        .hero-image-card:hover {
+            border-color: rgba(57, 255, 20, 0.4);
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.7), var(--shadow-glow-md);
+        }
+
+        .hero-image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.7s ease;
+        }
+
+        .hero-image-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .hero-image-card .img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.65) 0%, transparent 60%);
+        }
+
+        /* ─── SECTION BASE ───────────────────────────────────────── */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-alt {
+            background: rgba(10, 10, 10, 0.6);
+        }
+
+        .section-label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--neon);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        /* ─── PAIN POINTS SECTION ────────────────────────────────── */
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .pain-card {
+            padding: 2rem;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .pain-card:hover {
+            border-color: rgba(57, 255, 20, 0.25);
+            background: rgba(255, 255, 255, 0.03);
+            transform: translateY(-6px);
+        }
+
+        .pain-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--red);
+            font-size: 1.5rem;
+        }
+
+        .pain-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .pain-card p {
+            color: var(--gray);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* ─── MODULES SECTION ────────────────────────────────────── */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+        }
+
+        .module-card {
+            padding: 1.75rem;
+            border-radius: var(--radius-sm);
+            background: rgba(28, 31, 39, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .module-card:hover {
+            border-color: var(--neon);
+            transform: translateY(-6px);
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.1);
+        }
+
+        .module-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon);
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .module-card:hover .module-icon {
+            background: var(--neon);
+            color: #000;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .module-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .module-card p {
+            font-size: 0.87rem;
+            color: var(--gray);
+            line-height: 1.65;
+        }
+
+        /* ─── ACHIEVEMENTS ───────────────────────────────────────── */
+        .achieve-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .achieve-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.1rem 1.4rem;
+            border-radius: var(--radius-sm);
+            background: rgba(28, 31, 39, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: var(--transition);
+        }
+
+        .achieve-item:hover {
+            border-color: rgba(57, 255, 20, 0.3);
+            background: rgba(57, 255, 20, 0.04);
+            transform: translateX(4px);
+        }
+
+        .achieve-item .material-symbols-outlined {
+            color: var(--neon);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+            transition: var(--transition);
+        }
+
+        .achieve-item:hover .material-symbols-outlined {
+            transform: scale(1.15);
+        }
+
+        .achieve-item span:last-child {
+            font-size: 0.97rem;
+            color: var(--gray-light);
+            line-height: 1.55;
+        }
+
+        /* ─── BONUSES SECTION ────────────────────────────────────── */
+        .bonuses-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 1.5rem;
+            padding-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .bonuses-header .gratis-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.45rem 1.1rem;
+            background: var(--neon);
+            color: #000;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 8px;
+            animation: pulse-dot 2.5s infinite;
+        }
+
+        .bonuses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .bonus-card {
+            border-radius: var(--radius-sm);
+            padding: 2px;
+            background: linear-gradient(135deg, #ffd700, #b8860b);
+            box-shadow: 0 0 18px rgba(255, 215, 0, 0.28);
+            transition: var(--transition);
+        }
+
+        .bonus-card:hover {
+            box-shadow: 0 0 36px rgba(255, 215, 0, 0.55);
+            transform: translateY(-6px);
+        }
+
+        .bonus-inner {
+            background: var(--card);
+            border-radius: calc(var(--radius-sm) - 2px);
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bonus-thumb {
+            height: 150px;
+            background: linear-gradient(135deg, #1a1d25, #22252f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .bonus-thumb .material-symbols-outlined {
+            font-size: 3rem;
+            color: #555;
+            transition: var(--transition);
+        }
+
+        .bonus-card:hover .bonus-thumb .material-symbols-outlined {
+            color: var(--gold);
+        }
+
+        .bonus-value {
+            position: absolute;
+            top: 0.7rem;
+            right: 0.7rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(6px);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .bonus-body {
+            padding: 1.4rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .bonus-body h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .bonus-body p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .bonus-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.82rem;
+            margin-top: 0.5rem;
+        }
+
+        .bonus-tag .material-symbols-outlined {
+            font-size: 0.9rem;
+        }
+
+        /* ─── PRICING ────────────────────────────────────────────── */
+        .pricing-wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        .pricing-card {
+            width: 100%;
+            max-width: 580px;
+            background: rgba(28, 31, 39, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1.5px solid var(--neon);
+            border-radius: var(--radius-md);
+            box-shadow: 0 0 50px rgba(57, 255, 20, 0.18), var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon), var(--neon-alt));
+        }
+
+        .offer-tag {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: rgba(57, 255, 20, 0.1);
+            color: var(--neon);
+            border: 1px solid rgba(57, 255, 20, 0.25);
+            border-radius: var(--radius-full);
+            padding: 0.3rem 0.9rem;
+            font-family: var(--font-heading);
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .pricing-body {
+            padding: 2.5rem 3rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .pricing-sub {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .price-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .price-old {
+            color: rgba(156, 163, 175, 0.6);
+            text-decoration: line-through;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .price-main {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0.15rem;
+        }
+
+        .price-amount {
+            font-family: var(--font-heading);
+            font-size: clamp(5rem, 12vw, 8rem);
+            font-weight: 700;
+            color: var(--neon);
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
+            letter-spacing: -0.03em;
+        }
+
+        .price-currency {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-top: 1.2rem;
+        }
+
+        .pricing-includes {
+            text-align: left;
+            background: rgba(5, 5, 5, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .include-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.92rem;
+            color: var(--gray-light);
+        }
+
+        .include-item .material-symbols-outlined {
+            color: var(--neon);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .btn-join {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--neon);
+            color: #000;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-glow);
+            transition: var(--transition);
+        }
+
+        .btn-join:hover {
+            background: #42ff1e;
+            box-shadow: var(--shadow-glow-md);
+            transform: translateY(-3px);
+        }
+
+        .pricing-notes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .pricing-notes p {
+            font-size: 0.8rem;
+            color: rgba(156, 163, 175, 0.6);
+        }
+
+        .pricing-notes p:last-child {
+            font-size: 0.72rem;
+            color: rgba(156, 163, 175, 0.4);
+        }
+
+        /* ─── FOOTER ─────────────────────────────────────────────── */
+        footer {
+            background: var(--dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--neon);
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: rgba(156, 163, 175, 0.4);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ─── DIVIDER ─────────────────────────────────────────────── */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        }
+
+        /* ─── RESPONSIVE ──────────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .modules-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bonuses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                text-align: center;
+            }
+
+            .hero-badge {
+                margin: 0 auto 1.5rem auto;
+            }
+
+            .hero-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-image-wrap {
+                order: -1;
+            }
+
+            .pain-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achieve-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bonuses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bonuses-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .pricing-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .price-amount {
+                font-size: 6rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── HEADER ──────────────────────────────────────────────────── -->
+    <header id="site-header">
+        <div class="container">
+            <nav class="nav-wrapper">
+                <div class="logo">Víctor <span>Henríquez</span></div>
+                <a href="inscripcion.html" target="_blank" class="nav-cta">
+                    <span class="material-symbols-outlined" style="font-size:1rem;">lock</span>
+                    Acceso Alumnos
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ── HERO ────────────────────────────────────────────────────── -->
+    <section class="hero">
+        <div class="hero-radial"></div>
+        <div class="container">
+            <div class="hero-grid">
+                <!-- Text -->
+                <div>
+                    <div class="hero-badge">
+                        <div class="dot"></div>
+                        Nuevo Curso 2026
+                    </div>
+                    <h1>
+                        Domina WordPress y
+                        <span class="grad">Elementor</span>
+                        de 0 a Experto
+                    </h1>
+                    <p class="hero-desc">
+                        El paso a paso para construir sitios web que no solo se ven bien, sino que cargan rápido y
+                        convierten visitas en clientes. Domina las herramientas profesionales para crear cualquier
+                        diseño que imagines.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="inscripcion.html" target="_blank" class="btn-primary">
+                            QUIERO UNIRME
+                            <span class="material-symbols-outlined" style="font-size:1rem;">arrow_forward</span>
+                        </a>
+                        <div class="guarantee-note">
+                            <span class="material-symbols-outlined">verified</span>
+                            Garantía de 7 días
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="hero-image-wrap">
+                    <div class="hero-image-glow"></div>
+                    <div class="hero-image-card">
+                        <img src="imagenes/Gemini_Generated_Image_acpw69acpw69acpw.png"
+                            alt="Curso Profesional de Diseño Web con WordPress y Elementor"
+                            onerror="this.style.minHeight='320px';this.style.background='#1c1f27'">
+                        <div class="img-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── PAIN POINTS ─────────────────────────────────────────────── -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿Sientes que tienes el potencial<br>pero no encuentras el camino?</h2>
+                <p class="section-desc">Si te sientes estancado, probablemente te identifiques con una de estas
+                    barreras.</p>
+            </div>
+
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <span class="material-symbols-outlined">web</span>
+                    </div>
+                    <div>
+                        <h3>Llego tarde a la fiesta</h3>
+                        <p>Sientes que ya hay demasiados diseñadores. Falso. Hay millones de negocios que no tienen web
+                            y te están buscando a ti, no a una agencia costosa.</p>
+                    </div>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <span class="material-symbols-outlined">currency_exchange</span>
+                    </div>
+                    <div>
+                        <h3>Ingresos limitados y locales</h3>
+                        <p>Te frustra que la inflación se coma tu sueldo. Tu dolor real es no tener una habilidad que te
+                            permita cobrar en dólares desde cualquier parte del mundo.</p>
+                    </div>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <span class="material-symbols-outlined">lock_open</span>
+                    </div>
+                    <div>
+                        <h3>Atado a un horario y un jefe</h3>
+                        <p>Estás cansado de cumplir horarios rígidos y pedir permiso para vivir. Buscas libertad real,
+                            no promesas vacías.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── MODULES ─────────────────────────────────────────────────── -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Lo que vas a dominar</span>
+                <h2 class="section-title">De "Cero" a "Experto"<br>en tiempo récord</h2>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-icon"><span class="material-symbols-outlined">dns</span></div>
+                    <h3>El Ecosistema Digital</h3>
+                    <p>Aprende a comprar dominios, configurar hosting y crear correos corporativos para cobrar como
+                        profesional desde el primer día.</p>
+                </div>
+                <div class="module-card">
+                    <div class="module-icon"><span class="material-symbols-outlined">layers</span></div>
+                    <h3>El Motor WordPress</h3>
+                    <p>Instala y configura el software que usa el 40% de las webs del mundo. Sin códigos, todo con clics
+                        y seguridad blindada.</p>
+                </div>
+                <div class="module-card">
+                    <div class="module-icon"><span class="material-symbols-outlined">brush</span></div>
+                    <h3>Diseño con Elementor</h3>
+                    <p>La joya de la corona. Crea cualquier diseño con "Arrastrar y Soltar". Si lo imaginas, lo
+                        construyes.</p>
+                </div>
+                <div class="module-card">
+                    <div class="module-icon"><span class="material-symbols-outlined">trending_up</span></div>
+                    <h3>Tu Web en Google (SEO)</h3>
+                    <p>De nada sirve una web bonita si nadie la ve. Aprende los trucos básicos para que Google te haga
+                        visible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── ACHIEVEMENTS ────────────────────────────────────────────── -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿Qué vas a lograr dominar?</h2>
+            </div>
+
+            <div class="achieve-grid">
+                <div class="achieve-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Crearás webs de alto impacto con Elementor sin tocar código.</span>
+                </div>
+                <div class="achieve-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Aprenderás a configurar Dominios, Hosting y Correos Corporativos.</span>
+                </div>
+                <div class="achieve-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Entenderás las estrategias clave de SEO para atraer clientes.</span>
+                </div>
+                <div class="achieve-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Sabrás proteger tu trabajo con copias de seguridad automáticas.</span>
+                </div>
+                <div class="achieve-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Aprenderás a optimizar imágenes para webs que cargan al instante.</span>
+                </div>
+                <div class="achieve-item">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>No solo diseño: cómo buscar, cobrar y cerrar tu primer cliente.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── BONUSES ─────────────────────────────────────────────────── -->
+    <section class="section">
+        <div class="container">
+            <div class="bonuses-header">
+                <div>
+                    <h2 class="section-title" style="margin-bottom:0.4rem;">Bonos de Acción Rápida</h2>
+                    <p class="section-desc" style="font-size:0.95rem;">Disponibles solo si te unes hoy.</p>
+                </div>
+                <div class="gratis-tag">GRATIS HOY</div>
+            </div>
+
+            <div class="bonuses-grid">
+                <div class="bonus-card">
+                    <div class="bonus-inner">
+                        <div class="bonus-thumb">
+                            <span class="material-symbols-outlined">folder_zip</span>
+                            <div class="bonus-value">Valor: $47</div>
+                        </div>
+                        <div class="bonus-body">
+                            <h3>Kit de Agencia</h3>
+                            <p>Contratos, propuesta comercial editable y hoja de cálculo de precios lista para usar.</p>
+                            <div class="bonus-tag">
+                                <span class="material-symbols-outlined">star</span> Incluido Gratis
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bonus-card">
+                    <div class="bonus-inner">
+                        <div class="bonus-thumb">
+                            <span class="material-symbols-outlined">school</span>
+                            <div class="bonus-value">Valor: $97</div>
+                        </div>
+                        <div class="bonus-body">
+                            <h3>LinkedIn Masterclass</h3>
+                            <p>Cómo optimizar tu perfil para atraer clientes high-ticket sin prospectar en frío.</p>
+                            <div class="bonus-tag">
+                                <span class="material-symbols-outlined">star</span> Incluido Gratis
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bonus-card">
+                    <div class="bonus-inner">
+                        <div class="bonus-thumb">
+                            <span class="material-symbols-outlined">code_blocks</span>
+                            <div class="bonus-value">Valor: $29</div>
+                        </div>
+                        <div class="bonus-body">
+                            <h3>10 Plantillas Premium</h3>
+                            <p>Plantillas profesionales de Envato para usar en tus primeros proyectos y clientes.</p>
+                            <div class="bonus-tag">
+                                <span class="material-symbols-outlined">star</span> Incluido Gratis
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── PRICING ─────────────────────────────────────────────────── -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="pricing-wrap">
+                <div class="pricing-card">
+                    <div class="offer-tag">OFERTA LIMITADA</div>
+                    <div class="pricing-body">
+                        <div>
+                            <h2 class="pricing-title">Acceso Total De Por Vida</h2>
+                            <p class="pricing-sub">Sin mensualidades. Pago único. Acceso inmediato.</p>
+                        </div>
+
+                        <div class="price-block">
+                            <span class="price-old">$297 USD</span>
+                            <div class="price-main">
+                                <span class="price-amount">$15</span>
+                                <span class="price-currency">USD</span>
+                            </div>
+                        </div>
+
+                        <div class="pricing-includes">
+                            <div class="include-item">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                Curso completo WordPress + Elementor
+                            </div>
+                            <div class="include-item">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                Módulo de SEO Técnico y Seguridad
+                            </div>
+                            <div class="include-item">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                <span><strong style="color:var(--white);">BONO:</strong> Kit de Agencia +
+                                    Contratos</span>
+                            </div>
+                            <div class="include-item">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                Acceso a comunidad privada
+                            </div>
+                        </div>
+
+                        <a href="inscripcion.html" target="_blank" class="btn-join">
+                            Únete Ahora
+                            <span class="material-symbols-outlined"
+                                style="font-size:1rem;margin-left:0.4rem;">arrow_forward</span>
+                        </a>
+
+                        <div class="pricing-notes">
+                            <p>Pago único · Sin mensualidades · Acceso inmediato</p>
+                            <p>Acepto Binance, Zinli y Pago Móvil</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ──────────────────────────────────────────────────── -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Víctor <span>Henríquez</span></div>
+            <p>© <span id="yr"></span> Víctor Henríquez. Todos los derechos reservados. Este sitio no es parte de
+                Facebook Inc.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky header
+        const header = document.getElementById('site-header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 30);
+        });
+
+        // Footer year
+        document.getElementById('yr').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
